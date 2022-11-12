@@ -32,6 +32,7 @@ public class AppTest {
         assertFalse(schema.isValid("what does the fox say"));
     }
 
+    @Test
     public void testNumberSchema() {
         Validator v = new Validator();
 
