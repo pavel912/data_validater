@@ -11,12 +11,12 @@ public class StringSchema extends BaseSchema {
     }
 
     public StringSchema minLength(int minLength) {
-        operator = operator.and(sentence -> ((String) sentence).length() >= minLength);
+        operator = operator.and(sentence -> sentence == null || ((String) sentence).length() >= minLength);
         return this;
     }
 
     public StringSchema contains(String value) {
-        operator = operator.and(sentence -> ((String) sentence).contains(value));
+        operator = operator.and(sentence -> sentence == null || ((String) sentence).contains(value));
         return this;
     }
 }
