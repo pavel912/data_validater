@@ -4,22 +4,22 @@ import java.util.Objects;
 
 public final class NumberSchema extends BaseSchema {
     public NumberSchema required() {
-        operator = operator
+        setOperator(getOperator()
                 .and(Objects::nonNull)
-                .and(value -> value instanceof Integer);
+                .and(value -> value instanceof Integer));
         return this;
     }
 
     public NumberSchema positive() {
-        operator = operator
-                .and(value -> isNotRequired(value) || (int) value > 0);
+        setOperator(getOperator()
+                .and(value -> isNotRequired(value) || (int) value > 0));
         return this;
     }
 
     public NumberSchema range(int start, int end) {
-        operator = operator
+        setOperator(getOperator()
                 .and(value -> isNotRequired(value) || (int) value >= start)
-                .and(value -> isNotRequired(value) || (int) value <= end);
+                .and(value -> isNotRequired(value) || (int) value <= end));
         return this;
     }
 
