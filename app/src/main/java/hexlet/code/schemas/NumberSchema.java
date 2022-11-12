@@ -2,7 +2,7 @@ package hexlet.code.schemas;
 
 import java.util.Objects;
 
-public class NumberSchema extends BaseSchema {
+public final class NumberSchema extends BaseSchema {
     public NumberSchema required() {
         operator = operator
                 .and(Objects::nonNull)
@@ -12,14 +12,18 @@ public class NumberSchema extends BaseSchema {
 
     public NumberSchema positive() {
         operator = operator
-                .and(value -> value == null || !(value instanceof Integer) || (int) value > 0);
+                .and(value -> isNotRequired(value) || (int) value > 0);
         return this;
     }
 
     public NumberSchema range(int start, int end) {
         operator = operator
-                .and(value -> value == null || !(value instanceof Integer) || (int) value >= start)
-                .and(value -> value == null || !(value instanceof Integer) || (int) value <= end);
+                .and(value -> isNotRequired(value) || (int) value >= start)
+                .and(value -> isNotRequired(value) || (int) value <= end);
         return this;
+    }
+
+    private boolean isNotRequired(Object value) {
+        return value == null || !(value instanceof Integer);
     }
 }
