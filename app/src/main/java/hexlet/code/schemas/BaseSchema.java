@@ -1,19 +1,17 @@
 package hexlet.code.schemas;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 public abstract class BaseSchema {
-    private Predicate<Object> operator = value -> true;
+    private List<Predicate<Object>> listOperators = new ArrayList<>();
 
-    public final Predicate<Object> getOperator() {
-        return operator;
-    }
-
-    public final void setOperator(Predicate<Object> value) {
-        this.operator = value;
+    public final List<Predicate<Object>> getListOperators() {
+        return listOperators;
     }
 
     public final boolean isValid(Object value) {
-        return operator.test(value);
+        return listOperators.stream().allMatch(predicate -> predicate.test(value));
     }
 }
