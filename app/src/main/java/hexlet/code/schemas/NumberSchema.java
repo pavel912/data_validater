@@ -7,16 +7,14 @@ public final class NumberSchema extends BaseSchema {
     }
 
     public NumberSchema positive() {
-        addToListOperators(value -> isNotRequired(value) || (int) value > 0);
+        required();
+        addToListOperators(value -> (int) value > 0);
         return this;
     }
 
     public NumberSchema range(int start, int end) {
-        addToListOperators(value -> isNotRequired(value) || (int) value >= start && (int) value <= end);
+        required();
+        addToListOperators(value -> (int) value >= start && (int) value <= end);
         return this;
-    }
-
-    private boolean isNotRequired(Object value) {
-        return !(value instanceof Integer);
     }
 }
