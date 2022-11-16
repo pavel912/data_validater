@@ -10,14 +10,14 @@ public final class MapSchema extends BaseSchema {
     }
 
     public MapSchema sizeof(int size) {
-        required();
-        addToListOperators(value -> ((HashMap<?, ?>) value).size() >= size);
+        addToListOperators(value -> value == null
+                || value instanceof HashMap<?, ?> && ((HashMap<?, ?>) value).size() >= size);
         return this;
     }
 
     public MapSchema shape(Map<String, BaseSchema> schemas) {
-        required();
-        addToListOperators(checkedMap -> ((HashMap<?, ?>) checkedMap)
+        addToListOperators(checkedMap -> checkedMap == null
+                || checkedMap instanceof HashMap<?, ?> && ((HashMap<?, ?>) checkedMap)
                 .keySet() //get keySet of checked Map
                 .stream()
                 .allMatch(checkedMapKey -> schemas // check every key
